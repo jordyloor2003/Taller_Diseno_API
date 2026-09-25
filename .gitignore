@@ -1,1 +1,7 @@
 node_modules/
+backend/.env
+frontend/.env
+backend/dist/
+frontend/dist/
+.angular/
+frontend/.angular/

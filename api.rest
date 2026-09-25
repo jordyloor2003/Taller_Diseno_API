@@ -1,0 +1,46 @@
+### Petición de Obtención de Todos los Empleados
+GET http://localhost:3000/api/v1/empleados
+
+### Petición de Creación Exitosa (POST /empleados)
+POST http://localhost:3000/api/v1/empleados
+Content-Type: application/json
+
+{
+  "nombre": "Andrés Mendoza",
+  "cargo": "Arquitecto de Software",
+  "departamento": "Innovación",
+  "sueldo": 4500
+}
+
+### Petición de Creación Exitosa (POST /employees)
+POST http://localhost:3000/api/v1/employees
+Content-Type: application/json
+
+{
+  "nombre": "Andrés Mendoza",
+  "cargo": "Arquitecto de Software",
+  "departamento": "Innovación",
+  "sueldo": 4500
+}
+
+### Petición de Inyección Inválida (Activación del DTO)
+POST http://localhost:3000/api/v1/employees
+Content-Type: application/json
+
+{
+  "nombre": "An",
+  "cargo": "Developer",
+  "departamento": "TI",
+  "sueldo": -200
+}
+
+### Petición de Actualización Exitosa (Reemplazar con un ID válido)
+PUT http://localhost:3000/api/v1/empleados/65f1a2b3c4d5e6f7a8b9c0d1
+Content-Type: application/json
+
+{
+  "sueldo": 5200
+}
+
+### Petición con ID Inválido (Validación DTO Params)
+GET http://localhost:3000/api/v1/empleados/id-invalido-123

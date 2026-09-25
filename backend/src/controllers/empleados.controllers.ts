@@ -1,26 +1,38 @@
-const empleadoController:any={};
+import type { RequestHandler } from 'express';
+import { HttpError } from '../middleware/error-handler.js';
+import type { IEmployeeRepository } from '../repositories/employee.repository.js';
 
-const Empleado=require('../models/empleado');
+export const createEmployeeController = (repository: IEmployeeRepository) => ({
+  getEmployees: (async (_req, res) => {
+    res.json(await repository.findAll());
+  }) satisfies RequestHandler,
 
-empleadoController.getEmpleado=async(req,res)=>{
-    const empleados=await Empleado.find();
-    res.json(empleados);
-}
+  createEmployee: (async (req, res) => {
+    const created = await repository.create(req.body);
+    res.status(201).json(created);
+  }) satisfies RequestHandler,
 
-empleadoController.addEmpleado=async(req,res)=>{
-    const empleado=new Empleado(req.body);
-    await empleado.save();
-    res.json({status:'Empleado guardado'});
-}
+  updateEmployee: (async (req, res) => {
+    const id = req.params.id;
+    if (typeof id !== 'string') {
+      throw new HttpError(400, 'El id es obligatorio');
+    }
+    const employee = await repository.update(id, req.body);
+    if (!employee) {
+      throw new HttpError(404, 'Empleado no encontrado');
+    }
+    res.json(employee);
+  }) satisfies RequestHandler,
 
-empleadoController.updateEmpleado=async(req,res)=>{
-    const {id}=req.params;
-    const empleado=await Empleado.findByIdAndUpdate(id,req.body);
-    res.json({status:'Empleado actualizado'});
-}
-empleadoController.deleteEmpleado=async(req,res)=>{
-    const {id}=req.params;
-    await Empleado.findByIdAndRemove(id);
-    res.json({status:'Empleado eliminado'});
-}
-module.exports=empleadoController;
+  deleteEmployee: (async (req, res) => {
+    const id = req.params.id;
+    if (typeof id !== 'string') {
+      throw new HttpError(400, 'El id es obligatorio');
+    }
+    const deleted = await repository.delete(id);
+    if (!deleted) {
+      throw new HttpError(404, 'Empleado no encontrado');
+    }
+    res.json({ id });
+  }) satisfies RequestHandler,
+});

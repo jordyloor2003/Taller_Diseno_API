@@ -2,13 +2,17 @@
 import mongoose from 'mongoose';
 
 export const connectDatabase = async (): Promise<void> => {
-  const MONGO_URI = 'mongodb://127.0.0.1/usuarios_db';
+  const mongoUri = process.env.MONGO_URI;
+  if (!mongoUri) {
+    throw new Error('La variable de entorno MONGO_URI es obligatoria');
+  }
+
   try {
-    await mongoose.connect(MONGO_URI);
-    console.log('🔄 [Database]: Conexión exitosa a MongoDB');
+    await mongoose.connect(mongoUri);
+    console.log('[Database] Conexión exitosa a MongoDB');
   } catch (error) {
-    console.error('❌ Error crítico al conectar a la base de datos:', error);
-    process.exit(1);
+    console.error('[Database] Error crítico al conectar a MongoDB:', error);
+    throw error;
   }
 };
     
