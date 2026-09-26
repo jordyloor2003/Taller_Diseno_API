@@ -43,7 +43,7 @@ module.exports = {
     deploy: {
         production: {
             user: 'ubuntu',
-            host: '77.112.117.115',
+            host: '3.140.59.23',
             ref: 'origin/backend',
             repo: 'git@github.com:jordyloor2003/Taller_Diseno_API.git',
             path: '/var/www/gestion_clientes',
