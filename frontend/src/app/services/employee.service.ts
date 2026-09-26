@@ -11,7 +11,7 @@ interface ApiResponse<T> {
 @Injectable({ providedIn: 'root' })
 export class EmployeeService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = 'http://localhost:3000/api/v1/empleados';
+  private readonly apiUrl = 'http://3.140.59.23/api/v1/empleados';
   private readonly employeesSubject = new BehaviorSubject<readonly Employee[]>([]);
   readonly employees$ = this.employeesSubject.asObservable();
 
