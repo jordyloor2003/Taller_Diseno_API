@@ -44,7 +44,7 @@ module.exports = {
         production: {
             user: 'ubuntu',
             host: '77.112.117.115',
-            ref: 'origin/main',
+            ref: 'origin/backend',
             repo: 'git@github.com:jordyloor2003/Taller_Diseno_API.git',
             path: '/var/www/gestion_clientes',
             'post-deploy': 'cd backend && mkdir -p /var/www/gestion_clientes/logs && npm install && npm run build && pm2 reload ecosystem.config.cjs --env production && pm2 save',
