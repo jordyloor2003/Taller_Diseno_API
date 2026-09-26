@@ -10,7 +10,7 @@ export const createApp = () => {
   const app = express();
   const repository = new MongooseEmployeeRepository();
 
-  app.use(cors({ origin: process.env.CLIENT_ORIGIN ?? 'http://localhost:4200' }));
+  app.use(cors({ origin: process.env.CLIENT_ORIGIN ?? '*' }));
   app.use(morgan('dev'));
   app.use(express.json());
   app.use(responseWrapper);
