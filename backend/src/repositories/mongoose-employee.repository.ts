@@ -3,13 +3,18 @@ import type { IEmployeeRepository, NewEmployee } from './employee.repository.js'
 
 const toEmployee = (document: { _id: unknown; toObject(): Record<string, unknown> }): Employee => {
   const value = document.toObject();
-  return { ...value, id: String(document._id) } as Employee;
+  return { ...value, id: String(document._id), _id: String(document._id) } as unknown as Employee;
 };
 
 export class MongooseEmployeeRepository implements IEmployeeRepository {
   async findAll(): Promise<Employee[]> {
     const employees = await EmployeeModel.find().sort({ createdAt: -1 }).exec();
     return employees.map(toEmployee);
+  }
+
+  async findById(id: string): Promise<Employee | null> {
+    const employee = await EmployeeModel.findById(id).exec();
+    return employee ? toEmployee(employee) : null;
   }
 
   async create(employee: NewEmployee): Promise<Employee> {

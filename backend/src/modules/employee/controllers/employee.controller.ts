@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
-import { HttpError } from '../middleware/error-handler.js';
-import type { IEmployeeRepository } from '../repositories/employee.repository.js';
+import { HttpError } from '../../../middleware/error-handler.js';
+import type { IEmployeeRepository } from '../repositories/employee.repository.interface.js';
 
 export class EmployeeController {
   constructor(private readonly repository: IEmployeeRepository) {}

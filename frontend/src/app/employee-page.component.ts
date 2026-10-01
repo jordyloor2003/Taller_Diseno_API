@@ -2,15 +2,19 @@ import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { EmployeeFormComponent } from './components/employee-form.component';
 import { EmployeeTableComponent } from './components/employee-table.component';
+import { ToastContainerComponent } from './components/toast-container.component';
 import { Employee, EmployeeInput } from './models/employee.model';
 import { EmployeeService } from './services/employee.service';
 
 @Component({
   selector: 'app-employee-page',
   standalone: true,
-  imports: [AsyncPipe, EmployeeFormComponent, EmployeeTableComponent],
+  imports: [AsyncPipe, EmployeeFormComponent, EmployeeTableComponent, ToastContainerComponent],
   template: `
     <div class="page-container">
+      <!-- Sistema de Notificaciones Toast -->
+      <app-toast-container />
+
       <header class="app-header">
         <div class="header-content">
           <div class="brand">

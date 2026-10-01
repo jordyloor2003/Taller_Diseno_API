@@ -1,4 +1,4 @@
-import type { Employee } from '../models/empleado.js';
+import type { Employee } from '../../../models/empleado.js';
 
 export type NewEmployee = Omit<Employee, 'id' | 'createdAt' | 'updatedAt'>;
 
